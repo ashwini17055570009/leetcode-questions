@@ -1,0 +1,26 @@
+Given the head of a singly linked list and two integers left and right where left <= right,
+reverse the nodes of the list from position left to position right, and return the reversed list.
+
+
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(left!=1){
+            head->next=reverseBetween(head->next,left-1,right-1);
+            return head;
+        }
+        else{
+            ListNode *prev=NULL, *next, *curr=head;
+            int count=0;
+            while(count!=right){
+                next=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=next;
+                count++;
+            }
+            head->next=curr;
+            return prev;
+        }
+    }
+};
